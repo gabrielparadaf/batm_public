@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 
-public class ERC20Wallet implements IWallet{
+public class PolygonERC20Wallet implements IWallet{
     private final String contractAddress;
     private final String tokenSymbol;
     private final int tokenDecimalPlaces;
@@ -45,16 +45,15 @@ public class ERC20Wallet implements IWallet{
     private final BigDecimal gasPriceMultiplier;
     private final ERC20Interface noGasContract;
 
-    private static final Logger log = LoggerFactory.getLogger(ERC20Wallet.class);
+    private static final Logger log = LoggerFactory.getLogger(PolygonERC20Wallet.class);
 
-    public ERC20Wallet(String projectId, String mnemonicOrPassword, String tokenSymbol, int tokenDecimalPlaces, String contractAddress, BigInteger fixedGasLimit, BigDecimal gasPriceMultiplier) {
+    public PolygonERC20Wallet(String projectId, String mnemonicOrPassword, String tokenSymbol, int tokenDecimalPlaces, String contractAddress, BigInteger fixedGasLimit, BigDecimal gasPriceMultiplier) {
         this.tokenSymbol = tokenSymbol;
         this.tokenDecimalPlaces = tokenDecimalPlaces;
         this.contractAddress = contractAddress.toLowerCase();
         this.fixedGasLimit = fixedGasLimit;
         this.gasPriceMultiplier = gasPriceMultiplier;
         this.credentials = initCredentials(mnemonicOrPassword);
-        //this.w = Web3j.build(new HttpService("https://mainnet.infura.io/v3/" + projectId));
         this.w = Web3j.build(new HttpService("https://polygon-mainnet.infura.io/v3/" + projectId));
         this.noGasContract = ERC20Interface.load(this.contractAddress, w, credentials, DummyContractGasProvider.INSTANCE);
     }

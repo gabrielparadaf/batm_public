@@ -156,17 +156,17 @@ public class MaticoinAddresValidator implements ICryptoAddressValidator {
 
     }
 
-    @override
+    @Override
     public boolean isAddressValid(String Address) {
         return false;
     }
 
-    @override
+    @Override
     public boolean mustBeBase58Address() {
         return false;
     }
 
-    @override
+    @Override
     public boolean isPaperWalletSupported() {
         return false;
     }
