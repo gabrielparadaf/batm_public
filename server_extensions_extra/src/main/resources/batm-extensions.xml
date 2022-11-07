@@ -2420,7 +2420,7 @@
         <cryptologo cryptocurrency="VERUM" file="verum.svg"/>
     </extension>
     <extension class="com.generalbytes.batm.server.extensions.extra.maticoin.MaticoinExtension">
-        <wallet prefix="polygonERC20_maticoin_18_" name="Infura.io wallet - Maticoin">
+        <wallet prefix="polygonERC20_Maticoin_18_" name="Infura.io wallet - Maticoin">
             <tunnel supported="true"/>
             <sendtomany supported="true"/>
             <param name="projectId"/>
