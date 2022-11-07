@@ -303,7 +303,7 @@
                 <cryptocurrency>TENT</cryptocurrency>
                 <cryptocurrency>XZC</cryptocurrency>
                 <cryptocurrency>ZPAE</cryptocurrency>
-                <cryptocurrency>MC</cryptocurrency>
+                <cryptocurrency>Maticoin</cryptocurrency>
                 <help>USD is default fiat currency.</help>
             </ratesource>
             <ratesource prefix="bitflyer" name="BitFlyer.jp Rate Source" >
