@@ -13,7 +13,7 @@ import com.generalbytes.batm.server.extensions.ICryptoAddressValidator;
 import com.generalbytes.batm.server.extensions.IRateSource;
 import com.generalbytes.batm.server.extensions.IWallet;
 import com.generalbytes.batm.server.extensions.extra.ethereum.InfuraWallet;
-import com.generalbytes.batm.server.extensions.extra.ethereum.erc20.PolygonERC20WALLET;
+import com.generalbytes.batm.server.extensions.extra.ethereum.erc20.PolygonERC20Wallet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class MaticoinExtension extends AbstractExtension {
     @Override
     public Set<String> getSupportedCryptoCurrencies() {
         Set<String> result = new HashSet<String>();
-        result.add(CryptoCurrency.MATICOIN.getCode());
+        result.add(CryptoCurrency.Maticoin.getCode());
         return result;
     }
 
@@ -66,7 +66,7 @@ public class MaticoinExtension extends AbstractExtension {
                     }
 
                     if (projectId != null && passwordOrMnemonic != null) {
-                        return new PolygonERC20WALLET(projectId, passwordOrMnemonic, tokenSymbol, tokenDecimalPlaces, contractAddress, gasLimit, gasPriceMultiplier);
+                        return new PolygonERC20Wallet(projectId, passwordOrMnemonic, tokenSymbol, tokenDecimalPlaces, contractAddress, gasLimit, gasPriceMultiplier);
                     }
                 }
             } catch (Exception e) {
@@ -80,7 +80,7 @@ public class MaticoinExtension extends AbstractExtension {
 
     @Override
     public ICryptoAddressValidator createAddressValidator(String cryptoCurrency) {
-        if (CryptoCurrency.MATICOIN.getCode().equalsIgnoreCase(cryptoCurrency)) {
+        if (CryptoCurrency.Maticoin.getCode().equalsIgnoreCase(cryptoCurrency)) {
             return new MaticoinAddressValidator();
         }
         return null;
