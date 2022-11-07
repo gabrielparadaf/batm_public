@@ -1,4 +1,4 @@
-public com.generalbytes.batm.server.extensions.extra.maticoin;
+package com.generalbytes.batm.server.extensions.extra.maticoin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import com.generalbytes.batm.server.extensions.extra.ICryptoAddressValidator;
 
 public class MaticoinAddresValidator implements ICryptoAddressValidator {
 
-    private class final Logger log = LoggerFactory.getLogger(MaticoinAddresValidator.class);
+    private static final Logger log = LoggerFactory.getLogger(MaticoinAddresValidator.class);
     private static final String HEX_CHARS = "0123456789abcdef";
 
     public static boolean isPolygonAddressValid(String address) {
@@ -49,7 +49,7 @@ public class MaticoinAddresValidator implements ICryptoAddressValidator {
     
     }
 
-    publuc static String encodedAddressToChecksumedAddress(string Address) {
+    public static String encodedAddressToChecksumedAddress(string Address) {
 
         if (address == null) {
             return null;
