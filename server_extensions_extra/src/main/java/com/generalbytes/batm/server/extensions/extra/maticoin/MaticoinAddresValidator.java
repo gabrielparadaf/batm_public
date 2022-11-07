@@ -3,93 +3,77 @@ package com.generalbytes.batm.server.extensions.extra.maticoin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Hash;
-import com.generalbytes.batm.server.extensions.extra.ICryptoAddressValidator;
 
-public class MaticoinAddresValidator implements ICryptoAddressValidator {
+import com.generalbytes.batm.server.extensions.ICryptoAddressValidator;
 
-    private static final Logger log = LoggerFactory.getLogger(MaticoinAddresValidator.class);
+
+public class MaticoinAddressValidator implements ICryptoAddressValidator {
+
+    private static final Logger log = LoggerFactory.getLogger(MaticoinAddressValidator.class);
+
     private static final String HEX_CHARS = "0123456789abcdef";
 
-    public static boolean isPolygonAddressValid(String address) {
 
-        // Validate address string is not empyt
-        if (address == null || address.isEmpty) {
+    public static boolean isPolygonAddressValid (String address) {
+        if (address == null || address.isEmpty()) {
             return false;
         }
-
-        // Remove whitespaces.
         address = address.trim();
 
-        // Generate bytes from address string
-        byte[] addressBytes = decodeAddressAsBytes(address);
-
-        if (addressBytes != null) {
+        byte[] addrBytes = decodeAddressAsBytes(address);
+        if (addrBytes != null) {
             if (address.equals(address.toLowerCase()) || address.equals(address.toUpperCase())) {
-                // address doesn´t cointain checksum (checksum: shorturl.at/biu26)
+                //address doesn't contain checksum
                 return true;
-            } else {
-                // if address contains checksum, we should check it too.
-                final String encodedAddress = encodedAddressToChecksumedAddress(addressBytes);
-                if (address.equals(encodedAddress)) {
+            }else{
+                //if address contains checksum, we should check that too
+                final String encodedAddress = encodeAddressToChecksumedAddress(addrBytes);
+                if (address.equals(encodedAddress)){
                     return true;
-                } else {
+                }else{
                     return false;
                 }
             }
         }
-
         return false;
-    
     }
 
-    public static String encodedAddressToChecksumedAddress(byte[] addressBytes) {
-
-        String address = bytesToHexString(addressBytes);
-        return encodedAddressToChecksumAddress(address);
-    
+    public static String encodeAddressToChecksumedAddress(byte[] addrBytes) {
+        String address = bytesToHexString(addrBytes);
+        return encodeAddressToChecksumedAddress(address);
     }
 
-    public static String encodedAddressToChecksumedAddress(string Address) {
-
+    public static String encodeAddressToChecksumedAddress(String address) {
         if (address == null) {
             return null;
         }
-
-        // remove whitespaces
         address = address.trim();
-
-        if (address.isEmpty) {
+        if (address.isEmpty()) {
             return null;
         }
 
         final String addressHash = bytesToHexString(Hash.sha3(address.toLowerCase().getBytes()));
-        String checksumAddress = "";
 
-        final char[] addressChar = address.toCharArray();
-        final char[] addressHashChar = addressHash.toCharArray();
+        String checksumAddress ="";
 
-        for (int i = 0; i < addressChar.length; i++) {
+        final char[] addrChars = address.toCharArray();
+        final char[] addrHashChars = addressHash.toCharArray();
 
-            // if the character is 9 to f make it uppercase.
-            if (Integer.parseInt((addressChar[i]+""), 16) > 7) {
-                checksumAddress += (addressChar[i] + "").toUpperCase();
+        for (int i = 0; i < addrChars.length; i++ ) {
+            // If ith character is 9 to f then make it uppercase
+            if (Integer.parseInt((addrHashChars[i]+""), 16) > 7) {
+                checksumAddress += (addrChars[i] +"").toUpperCase();
             } else {
-                checksumAddress += (addressChar[i] + "").toLowerCase();
+                checksumAddress += (addrChars[i] +"").toLowerCase();
             }
-        
         }
-
         return "0x"+checksumAddress;
-
     }
 
     public static byte[] decodeAddressAsBytes(String address) {
-
         if (address == null) {
             return null;
         }
-
-        // remove whitespaces
         address = address.trim();
 
         if (address.toLowerCase().startsWith("0x")) {
@@ -97,78 +81,72 @@ public class MaticoinAddresValidator implements ICryptoAddressValidator {
         }
 
         if (address.length() == 42) {
+            //probably this format 0xf8b483DbA2c3B7176a3Da549ad41A48BB3121069
             if (address.toLowerCase().startsWith("0x")) {
                 address = address.substring(2);
             }
         }
 
-        if (address.length == 40) {
+        // verificar si es wallet de testnet
+        if (address.length() == 40) {
+            //probably this format f8b483DbA2c3B7176a3Da549ad41A48BB3121069
             if (isAllLowerCaseHex(address.toLowerCase())) {
                 return hexStringToByteArray(address);
             }
         }
-
         return null;
-
     }
 
-    private static byte[] hexStringToByteArray(String e) {
-
+    private static byte[] hexStringToByteArray(String s) {
         int len = s.length();
-        Byte[] data = new byte[len/2];
+        byte[] data = new byte[len/2];
 
-        for (int i = 0; i < len; i+=2) {
+        for(int i = 0; i < len; i+=2){
             data[i/2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i+1), 16));
         }
-
         return data;
-
     }
 
     private static boolean isAllLowerCaseHex(String string) {
-
         final char[] chars = string.toCharArray();
-
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             if (HEX_CHARS.indexOf(c) == -1) {
                 return false;
             }
         }
-
         return true;
-
     }
 
     private static String bytesToHexString(byte[] bytes) {
-
+        // http://stackoverflow.com/questions/332079
         StringBuffer sb = new StringBuffer();
-
         for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.bytesToHexString(0xFF & bytes[i]);
+            String hex = Integer.toHexString(0xFF & bytes[i]);
             if (hex.length() == 1) {
                 sb.append('0');
             }
             sb.append(hex);
         }
-
         return sb.toString();
-
     }
 
     @Override
-    public boolean isAddressValid(String Address) {
+    public boolean isAddressValid(String address) {
+        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean mustBeBase58Address() {
+        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isPaperWalletSupported() {
+        // TODO Auto-generated method stub
         return false;
     }
-    
+
 }
