@@ -36,4 +36,5 @@ public class Converters {
     public static final BigDecimal TLTC = BigDecimal.TEN.pow(8);
     public static final BigDecimal TETH = BigDecimal.TEN.pow(18);
     public static final BigDecimal TXRP = BigDecimal.TEN.pow(8);
+    public static final BigDecimal MC = BigDecimal.TEN.pow(8);
 }
