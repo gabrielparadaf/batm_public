@@ -2419,18 +2419,18 @@
         <cryptologo cryptocurrency="VERUM" file="verum.png"/>
         <cryptologo cryptocurrency="VERUM" file="verum.svg"/>
     </extension>
-    <extension class="com.generalbytes.batm.server.extensions.extra.maticoin.MaticoinExtension">
-        <wallet prefix="polygonERC20_Maticoin_18_" name="Infura.io wallet - Maticoin">
+    <extension class="com.generalbytes.batm.server.extensions.extra.maticoin.MaticoinExtension" >
+        <wallet prefix="polygonERC20_MATICOIN_18_0x7ee71692e3B19064b9C594DD7e5689A6076450d8" name="Infura.io wallet - MATICOIN" >
             <tunnel supported="true"/>
             <sendtomany supported="true"/>
-            <param name="projectId"/>
-            <param name="mnemonic"/>
-            <param name="gaslimit"/>
-            <param name="gasPriceMultiplier"/>
+            <param name="projectId" />
+            <param name="mnemonic" />
+            <param name="gaslimit" />
+            <param name="gasPriceMultiplier" />
             <cryptocurrency>Maticoin</cryptocurrency>
         </wallet>
-        <ratesource prefix="ltcfix" name="Fix Price">
-            <param name="price"/>
+        <ratesource prefix="ltcfix" name ="Fix Price" >
+            <param name="price" />
             <cryptocurrency>Maticoin</cryptocurrency>
             <help>USD is default fiat currency.</help>
         </ratesource>
