@@ -18,6 +18,7 @@ public class MaticoinAddressValidator implements ICryptoAddressValidator {
         if (address == null || address.isEmpty()) {
             return false;
         }
+        
         address = address.trim();
 
         byte[] addrBytes = decodeAddressAsBytes(address);

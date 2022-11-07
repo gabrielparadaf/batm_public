@@ -125,7 +125,7 @@ public enum CryptoCurrency {
     MUE("MonetaryUnit"),
     XPM("Primecoin"),
     ZPAE("ZelaaPayAE"),
-    MC("Maticoin"),
+    maticoin("Maticoin"),
 
     TBCH("test BCH"),
     TBTC("test BTC"),

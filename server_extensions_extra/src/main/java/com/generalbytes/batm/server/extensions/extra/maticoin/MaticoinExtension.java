@@ -30,7 +30,7 @@ public class MaticoinExtension extends AbstractExtension {
     @Override
     public Set<String> getSupportedCryptoCurrencies() {
         Set<String> result = new HashSet<String>();
-        result.add(CryptoCurrency.MC.getCode());
+        result.add(CryptoCurrency.maticoin.getCode());
         return result;
     }
 
@@ -80,7 +80,7 @@ public class MaticoinExtension extends AbstractExtension {
 
     @Override
     public ICryptoAddressValidator createAddressValidator(String cryptoCurrency) {
-        if (CryptoCurrency.MC.getCode().equalsIgnoreCase(cryptoCurrency)) {
+        if (CryptoCurrency.maticoin.getCode().equalsIgnoreCase(cryptoCurrency)) {
             return new MaticoinAddressValidator();
         }
         return null;
